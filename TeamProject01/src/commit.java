@@ -1,5 +1,6 @@
 
 public class commit {
-	sd
-
+	public void main(String[] args) {
+	System.out.println("ÇÑ½ÂÁø");
+	}
 }
