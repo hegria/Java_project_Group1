@@ -20,18 +20,20 @@ public class Yatch {
 				play.dieces[i] = random.nextInt(6);
 			}
 		}
+		scoring();
 	}
 	void scoring() {
 		//주사위 눈합친거
 		int[] numof = new int[6];
 		for (int i =0; i<5;i++) {
 			numof[play.dieces[i]]++;
+			
 		}
 		for (int i =0; i<6;i++) {
-			play.suits[i] = numof[i];	
+			play.suits[i] = numof[i]*(i+1);	
 		}
 		for (int i=0;i<6;i++) {
-			play.suits[6] += numof[i];
+			play.suits[6] += numof[i]*(i+1);
 		}
 		int isone = 0;
 		int isfour = 0;
@@ -77,6 +79,7 @@ public class Yatch {
 	// suits는 버튼에 지정된 값 (족보 몇번째껄로 할건지)
 	void pressscore(int player,int suits) {
 		table[player][suits] = play.suits[suits];
+		System.out.println(table[player][suits]);
 		// 합구애야함
 	}
 }

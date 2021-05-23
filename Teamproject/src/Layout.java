@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -15,11 +17,23 @@ import java.awt.event.ActionEvent;
 
 public class Layout extends JFrame implements Runnable{
 	Yatch yatch;
+	int dices[] = {1,1,1,1,1};
+	int suit=0;
+	DefaultTableModel model;
+	Object data[][];
+
+	JButton diceButton1;
+	JButton diceButton2;
+	JButton diceButton3;
+	JButton diceButton4;
+	JButton diceButton5;
 	public Layout(Yatch yatch) {
 		this.yatch = yatch; 
 		// TODO Auto-generated constructor stub
 	}
+	
 	public void Frame() {
+		
 		JPanel panel_left = new JPanel();
 		panel_left.setLayout(null);
 	
@@ -36,17 +50,17 @@ public class Layout extends JFrame implements Runnable{
 		panel.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(1, 3, 0, 0));
 		
-		JButton btnNewButton_5 = new JButton("New button");
-		panel_1.add(btnNewButton_5);
+		JButton imojibtn1 = new JButton("New button");
+		panel_1.add(imojibtn1);
 		
-		JButton btnNewButton_6 = new JButton("New button");
-		panel_1.add(btnNewButton_6);
+		JButton imojibtn2 = new JButton("New button");
+		panel_1.add(imojibtn2);
 		
-		JButton btnNewButton_7 = new JButton("New button");
-		panel_1.add(btnNewButton_7);
+		JButton imojibtn3 = new JButton("New button");
+		panel_1.add(imojibtn3);
 		
-		JButton btnNewButton_8 = new JButton("New button");
-		panel_1.add(btnNewButton_8);
+		JButton imojibtn4 = new JButton("New button");
+		panel_1.add(imojibtn4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Choose Imoji");
 		panel.add(lblNewLabel_5, BorderLayout.NORTH);
@@ -65,26 +79,36 @@ public class Layout extends JFrame implements Runnable{
 		,{"Six",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Bonus",yatch.table[0][12],yatch.table[1][12]},{"Choice",yatch.table[0][i],yatch.table[1][i++]}
 		,{"FourOfkind",yatch.table[0][i],yatch.table[1][i++]},
-		{"FullHouse",yatch.table[0][i],yatch.table[1][i++]},{"Small Straight",yatch.table[0][i],yatch.table[1][i++]}
-		,{"Large Straight",yatch.table[0][i],yatch.table[1][i++]}
+		{"Small Straight",yatch.table[0][i],yatch.table[1][i++]},{"Large Straight",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Full House",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Yatch",yatch.table[0][i],yatch.table[1][i++]},{"Result",yatch.table[0][13],yatch.table[1][13]}};
-		DefaultTableModel model = new DefaultTableModel(data,title);
+		model = new DefaultTableModel(data,title);
 		JPanel rowofdice = new JPanel();
 		rowofdice.setLayout(new GridLayout(1, 5));
-		JButton btnNewButton = new JButton(Integer.toString(yatch.play.dieces[0]+1));
-		rowofdice.add(btnNewButton,BorderLayout.CENTER);
+		diceButton1 = new JButton(Integer.toString(yatch.play.dieces[0]+1));
+		diceButton1.setActionCommand("dic0");
+		diceButton1.addActionListener(new ButtonClickListener());
+		rowofdice.add(diceButton1,BorderLayout.CENTER);
 		
-		JButton btnNewButton_1 = new JButton(Integer.toString(yatch.play.dieces[1]+1));
-		rowofdice.add(btnNewButton_1);
+		diceButton2 = new JButton(Integer.toString(yatch.play.dieces[1]+1));
+		diceButton2.setActionCommand("dic1");
+		diceButton2.addActionListener(new ButtonClickListener());
+		rowofdice.add(diceButton2);
 		
-		JButton btnNewButton_2 = new JButton(Integer.toString(yatch.play.dieces[2]+1));
-		rowofdice.add(btnNewButton_2);
+		diceButton3 = new JButton(Integer.toString(yatch.play.dieces[2]+1));
+		diceButton3.setActionCommand("dic2");
+		diceButton3.addActionListener(new ButtonClickListener());
+		rowofdice.add(diceButton3);
 		
-		JButton btnNewButton_3 = new JButton(Integer.toString(yatch.play.dieces[3]+1));
-		rowofdice.add(btnNewButton_3);
+		diceButton4 = new JButton(Integer.toString(yatch.play.dieces[3]+1));
+		diceButton4.setActionCommand("dic3");
+		diceButton4.addActionListener(new ButtonClickListener());
+		rowofdice.add(diceButton4);
 		
-		JButton btnNewButton_4 = new JButton(Integer.toString(yatch.play.dieces[4]+1));
-		rowofdice.add(btnNewButton_4);
+		diceButton5 = new JButton(Integer.toString(yatch.play.dieces[4]+1));
+		diceButton5.setActionCommand("dic4");
+		diceButton5.addActionListener(new ButtonClickListener());
+		rowofdice.add(diceButton5);
 		
 		dicepanel.add(rowofdice);
 
@@ -108,8 +132,10 @@ public class Layout extends JFrame implements Runnable{
 		
 		JLabel lblNewLabel_1 = new JLabel("Dice");
 		dicepanel.add(lblNewLabel_1,BorderLayout.NORTH);
-		JButton btnApply = new JButton("Roll");
-		dicepanel.add(btnApply,BorderLayout.SOUTH);
+		JButton rollbtn = new JButton("Roll");
+		rollbtn.setActionCommand("rol");
+		rollbtn.addActionListener(new ButtonClickListener());
+		dicepanel.add(rollbtn,BorderLayout.SOUTH);
 		
 		panel_right.add(dicepanel);
 		
@@ -124,52 +150,71 @@ public class Layout extends JFrame implements Runnable{
 		panel_2.add(panel_3, BorderLayout.CENTER);
 		panel_3.setLayout(new GridLayout(6, 2, 0, 0));
 		
-		JButton btnNewButton_10 = new JButton("One");
-		panel_3.add(btnNewButton_10);
+		JButton suitbtn1 = new JButton("One");
+		suitbtn1.setActionCommand("sui0");
+		suitbtn1.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn1);
 		
-		JButton btnNewButton_11 = new JButton("Two");
-		panel_3.add(btnNewButton_11);
+		JButton suitbtn2 = new JButton("Two");
+		suitbtn2.setActionCommand("sui1");
+		suitbtn2.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn2);
 		
-		JButton btnNewButton_12 = new JButton("Three");
-		panel_3.add(btnNewButton_12);
+		JButton suitbtn3 = new JButton("Three");
+		suitbtn3.setActionCommand("sui2");
+		suitbtn3.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn3);
 		
-		JButton btnNewButton_13 = new JButton("Four");
-		panel_3.add(btnNewButton_13);
+		JButton suitbtn4 = new JButton("Four");
+		suitbtn4.setActionCommand("sui3");
+		suitbtn4.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn4);
 		
-		JButton btnNewButton_14 = new JButton("Five");
-		btnNewButton_14.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel_3.add(btnNewButton_14);
+		JButton suitbtn5 = new JButton("Five");
+		suitbtn5.setActionCommand("sui4");
+		suitbtn5.addActionListener(new ButtonClickListener());
 		
-		JButton btnNewButton_15 = new JButton("Six");
-		panel_3.add(btnNewButton_15);
+		panel_3.add(suitbtn5);
 		
-		JButton btnNewButton_16 = new JButton("Choice");
-		panel_3.add(btnNewButton_16);
+		JButton suitbtn6 = new JButton("Six");
+		suitbtn6.setActionCommand("sui5");
+		suitbtn6.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn6);
 		
-		JButton btnNewButton_17 = new JButton("Four of kind");
-		panel_3.add(btnNewButton_17);
+		JButton suitbtn7 = new JButton("Choice");
+		suitbtn7.setActionCommand("sui6");
+		suitbtn7.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn7);
 		
-		JButton btnNewButton_18 = new JButton("Small Straight");
-		panel_3.add(btnNewButton_18);
+		JButton suitbtn8 = new JButton("Four of kind");
+		suitbtn8.setActionCommand("sui7");
+		suitbtn8.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn8);
 		
-		JButton btnNewButton_19 = new JButton("Large Straight");
-		btnNewButton_19.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel_3.add(btnNewButton_19);
+		JButton suitbtn9 = new JButton("S. Straight");
+		suitbtn9.setActionCommand("sui8");
+		suitbtn9.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn9);
 		
-		JButton btnNewButton_20 = new JButton("Full House");
-		panel_3.add(btnNewButton_20);
+		JButton suitbtn10 = new JButton("Large Straight");
+		suitbtn10.setActionCommand("sui9");
+		suitbtn10.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn10);
 		
-		JButton btnNewButton_21 = new JButton("Yatch");
-		panel_3.add(btnNewButton_21);
+		JButton suitbtn11 = new JButton("Full House");
+		suitbtn11.setActionCommand("sui10");
+		suitbtn11.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn11);
 		
-		JButton btnNewButton_22 = new JButton("Send");
-		panel_2.add(btnNewButton_22, BorderLayout.SOUTH);
+		JButton suitbtn12 = new JButton("Yatch");
+		suitbtn12.setActionCommand("sui11");
+		suitbtn12.addActionListener(new ButtonClickListener());
+		panel_3.add(suitbtn12);
+		
+		JButton sendbtn = new JButton("Send");
+		sendbtn.setActionCommand("det");
+		sendbtn.addActionListener(new ButtonClickListener());
+		panel_2.add(sendbtn, BorderLayout.SOUTH);
 		JTable table = new JTable(model);
 		tablepanel.add(table, BorderLayout.CENTER);
 		
@@ -182,17 +227,68 @@ public class Layout extends JFrame implements Runnable{
 		setVisible(true);
 		
 	}
+	public void updates() {
+		diceButton1.setText(Integer.toString(yatch.play.dieces[0]+1));
+		diceButton2.setText(Integer.toString(yatch.play.dieces[1]+1));
+		diceButton3.setText(Integer.toString(yatch.play.dieces[2]+1));
+		diceButton4.setText(Integer.toString(yatch.play.dieces[3]+1));
+		diceButton5.setText(Integer.toString(yatch.play.dieces[4]+1));
+		int i =0;
+		for(int j =0; j<14;j++) {
+			if(j==6) {
+				model.setValueAt(yatch.table[0][12], j, 1);
+				model.setValueAt(yatch.table[1][12], j, 2);
+				continue;
+			}
+			if(j==13) {
+				model.setValueAt(yatch.table[0][13], j, 1);
+				model.setValueAt(yatch.table[1][13], j, 2);
+				continue;
+			}
+			model.setValueAt(yatch.table[0][i], j, 1);
+			model.setValueAt(yatch.table[1][i++], j, 2);
+		}
+	}
 	@Override
 	public void run() {
+		
+		yatch.rolldice(dices);
 		// TODO Auto-generated method stub
 		Frame();
 		while (true) {
 			//값을 읽어오는 쓰래드를 실행시키는
-			super.repaint();
+			updates();
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO: handle exception
+			}
+		}
+	}
+	class ButtonClickListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			String command = e.getActionCommand();
+			String realcommand = command.substring(0, 3);
+			if(realcommand.equals("dic")) {
+				int a = Integer.parseInt(command.substring(3));
+				if(dices[a] == 0) {
+					dices[a] = 1;
+				}else {
+					dices[a] = 0;
+				}
+			}
+			if(realcommand.equals("sui")) {
+				int a = Integer.parseInt(command.substring(3));
+				suit = a;
+			}
+			if(realcommand.equals("rol")) {
+				yatch.rolldice(dices);
+				
+			}
+			if(realcommand.equals("det")) {
+				yatch.pressscore(0,suit);
 			}
 		}
 	}
