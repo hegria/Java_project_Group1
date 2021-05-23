@@ -14,7 +14,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Layout extends JFrame implements Runnable{
-	
+	Yatch yatch;
+	public Layout(Yatch yatch) {
+		this.yatch = yatch; 
+		// TODO Auto-generated constructor stub
+	}
 	public void Frame() {
 		JPanel panel_left = new JPanel();
 		panel_left.setLayout(null);
@@ -53,26 +57,33 @@ public class Layout extends JFrame implements Runnable{
 		JPanel dicepanel = new JPanel();
 		dicepanel.setLayout(new BorderLayout());
 		
+		int i = 0;
 		String title[] = {"Suits","Player1","Player2"};
-		Object data[][] = {{"One","",""},{"Two","",""},{"Three","",""},{"Four","",""},{"Five","",""},{"Six","",""}
-		,{"Bonus","",""},{"Choice","",""},{"FourOfkind","",""},{"FullHouse","",""},{"Small Straight","",""},{"Large Straight","",""}
-		,{"Yatch","",""}};
+		Object data[][] = {{"One",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Two",yatch.table[0][i],yatch.table[1][i++]},{"Three",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Four",yatch.table[0][i],yatch.table[1][i++]},{"Five",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Six",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Bonus",yatch.table[0][12],yatch.table[1][12]},{"Choice",yatch.table[0][i],yatch.table[1][i++]}
+		,{"FourOfkind",yatch.table[0][i],yatch.table[1][i++]},
+		{"FullHouse",yatch.table[0][i],yatch.table[1][i++]},{"Small Straight",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Large Straight",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Yatch",yatch.table[0][i],yatch.table[1][i++]},{"Result",yatch.table[0][13],yatch.table[1][13]}};
 		DefaultTableModel model = new DefaultTableModel(data,title);
 		JPanel rowofdice = new JPanel();
 		rowofdice.setLayout(new GridLayout(1, 5));
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton(Integer.toString(yatch.play.dieces[0]+1));
 		rowofdice.add(btnNewButton,BorderLayout.CENTER);
 		
-		JButton btnNewButton_1 = new JButton("New button");
+		JButton btnNewButton_1 = new JButton(Integer.toString(yatch.play.dieces[1]+1));
 		rowofdice.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton(Integer.toString(yatch.play.dieces[2]+1));
 		rowofdice.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("New button");
+		JButton btnNewButton_3 = new JButton(Integer.toString(yatch.play.dieces[3]+1));
 		rowofdice.add(btnNewButton_3);
 		
-		JButton btnNewButton_4 = new JButton("New button");
+		JButton btnNewButton_4 = new JButton(Integer.toString(yatch.play.dieces[4]+1));
 		rowofdice.add(btnNewButton_4);
 		
 		dicepanel.add(rowofdice);
@@ -176,6 +187,7 @@ public class Layout extends JFrame implements Runnable{
 		// TODO Auto-generated method stub
 		Frame();
 		while (true) {
+			//값을 읽어오는 쓰래드를 실행시키는
 			super.repaint();
 			try {
 				Thread.sleep(500);

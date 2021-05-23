@@ -1,7 +1,9 @@
 
-public class Main {
+public class Client {
+	Yatch yatch;
 	public static void main(String[] args) {
-		Layout layout = new Layout();
+		Yatch yatch = new Yatch();
+		Layout layout = new Layout(yatch);
 		Thread draw = new Thread(layout);
 		draw.start();
 	}
