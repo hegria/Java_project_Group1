@@ -13,10 +13,9 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Layout extends JFrame {
-	private JTable table;
-	public Layout() {
-
+public class Layout extends JFrame implements Runnable{
+	
+	public void Frame() {
 		JPanel panel_left = new JPanel();
 		panel_left.setLayout(null);
 	
@@ -168,8 +167,22 @@ public class Layout extends JFrame {
 		
 		splitPane.setDividerLocation(200);
 		getContentPane().add(splitPane, BorderLayout.CENTER);
-		
-		
+		setSize(1000,500);
+		setVisible(true);
 		
 	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		Frame();
+		while (true) {
+			super.repaint();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO: handle exception
+			}
+		}
+	}
+	
 }
