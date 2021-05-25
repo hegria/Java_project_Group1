@@ -10,7 +10,7 @@ public class Yatch {
 	int turn; //1-24
 	int rollchance; // °»½Å
 	Yatch(){
-		turn = 0;
+		turn = 1;
 		rollchance = 3;
 	}
 	void rolldice(int nums[]) {

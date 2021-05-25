@@ -105,7 +105,7 @@ public class Layout extends JFrame implements Runnable{
 		panel.add(lblNewLabel_5, BorderLayout.NORTH);
 		
 		JButton sendimobtn = new JButton("Send");
-		sendimobtn.setActionCommand("smo");
+		sendimobtn.setActionCommand("sio");
 		sendimobtn.addActionListener(new ButtonClickListener());
 		panel.add(sendimobtn, BorderLayout.SOUTH);
 		
@@ -297,6 +297,9 @@ public class Layout extends JFrame implements Runnable{
 		return icon;
 	}
 	public void updates() {
+
+		nowturn.setText("Player "+Integer.toString(yatch.turn%2)+"'s turn");
+		nowturnnum = new JLabel(Integer.toString(yatch.turn+1/2)+"/12");
 		if(dices[0]==0) {
 			diceButton1.setBackground(Color.LIGHT_GRAY);
 		} else {
@@ -441,7 +444,11 @@ public class Layout extends JFrame implements Runnable{
 				imoji = 0;
 			}
 			if(realcommand.equals("det")) {
-				yatch.pressscore(0,suit);
+				if(suit == -1) {
+					
+				}else {
+					yatch.pressscore(0,suit);
+				}
 				suit = -1;
 			}
 		}
