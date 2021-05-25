@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -27,10 +28,10 @@ import java.awt.event.ActionEvent;
 
 public class Layout extends JFrame implements Runnable{
 	Yatch yatch;
-	int dices[] = {1,1,1,1,1};
-	int imoji=0;
-	int suit=-1;
+	int userid;
 	int myinfo;
+	Userinfo userinfo;
+	String action;
 	DefaultTableModel model;
 	Object data[][];
 	JLabel nowturn;
@@ -56,8 +57,13 @@ public class Layout extends JFrame implements Runnable{
 	JButton suitbtn10;
 	JButton suitbtn11;
 	JButton suitbtn12;
-	public Layout(Yatch yatch) {
+	JLabel restofLabel;
+	JLabel player1EmoLabel;
+	JLabel player2EmoLabel;
+	public Layout(Yatch yatch,int userid, Userinfo userinfo) {
 		this.yatch = yatch; 
+		this.userid = userid;
+		this.userinfo = userinfo;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -120,7 +126,7 @@ public class Layout extends JFrame implements Runnable{
 		,{"Six",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Bonus",yatch.table[0][12],yatch.table[1][12]},{"Choice",yatch.table[0][i],yatch.table[1][i++]}
 		,{"FourOfkind",yatch.table[0][i],yatch.table[1][i++]},
-		{"Small Straight",yatch.table[0][i],yatch.table[1][i++]},{"Large Straight",yatch.table[0][i],yatch.table[1][i++]}
+		{"S. Straight",yatch.table[0][i],yatch.table[1][i++]},{"L. Straight",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Full House",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Yatch",yatch.table[0][i],yatch.table[1][i++]},{"Result",yatch.table[0][13],yatch.table[1][13]}};
 		model = new DefaultTableModel(data,title);
@@ -170,8 +176,8 @@ public class Layout extends JFrame implements Runnable{
 		imojipanel.add(lblNewLabel_4, BorderLayout.EAST);
 		JPanel emojibottomPanel = new JPanel();
 		emojibottomPanel.setLayout(new BorderLayout(0,0));
-		JLabel player1EmoLabel = new JLabel(imojIcon(0));
-		JLabel player2EmoLabel = new JLabel(imojIcon(0));
+		player1EmoLabel = new JLabel(imojIcon(0));
+		player2EmoLabel = new JLabel(imojIcon(0));
 		emojibottomPanel.add(player1EmoLabel,BorderLayout.WEST);
 		emojibottomPanel.add(player2EmoLabel,BorderLayout.EAST);
 		imojipanel.add(emojibottomPanel,BorderLayout.SOUTH);
@@ -180,7 +186,11 @@ public class Layout extends JFrame implements Runnable{
 		dicepanel2.setLayout(new BorderLayout(0,0));
 		
 		JLabel lblNewLabel_1 = new JLabel("Dice");
-		JLabel restofLabel = new JLabel("3 Times Left");
+		JLabel Yourname =new JLabel("You are Player"+Integer.toString(userid));
+		Yourname.setHorizontalAlignment(JLabel.CENTER);
+		
+		restofLabel = new JLabel("3 Times Left");
+		panelturns.add(Yourname,BorderLayout.NORTH);
 		dicepanel2.add(lblNewLabel_1,BorderLayout.WEST);
 		dicepanel2.add(restofLabel,BorderLayout.EAST);
 		dicepanel.add(dicepanel2,BorderLayout.NORTH);
@@ -272,7 +282,7 @@ public class Layout extends JFrame implements Runnable{
 		
 		JLabel lblNewLabel = new JLabel("Table");
 		tablepanel.add(lblNewLabel, BorderLayout.NORTH);
-		tablepanel.setSize(200, 200);
+		tablepanel.setSize(200, 300);
 		panel_left.add(tablepanel,BorderLayout.CENTER);
 		panel_left.add(panelturns,BorderLayout.SOUTH);
 		splitPane.setDividerLocation(200);
@@ -297,30 +307,34 @@ public class Layout extends JFrame implements Runnable{
 		return icon;
 	}
 	public void updates() {
-
-		nowturn.setText("Player "+Integer.toString(yatch.turn%2)+"'s turn");
-		nowturnnum = new JLabel(Integer.toString(yatch.turn+1/2)+"/12");
-		if(dices[0]==0) {
+		player1EmoLabel.setIcon(imojIcon(yatch.imoji[0]));
+		player2EmoLabel.setIcon(imojIcon(yatch.imoji[1]));
+		player1EmoLabel.setBackground(Color.WHITE);
+		player2EmoLabel.setBackground(Color.WHITE);
+		restofLabel.setText(Integer.toString(yatch.rollchance)+" turns left");
+		nowturn.setText("Player "+Integer.toString(2-(yatch.turn)%2)+"'s turn");
+		nowturnnum.setText(Integer.toString((yatch.turn+1)/2)+"/12");
+		if(userinfo.dices[0]==0) {
 			diceButton1.setBackground(Color.LIGHT_GRAY);
 		} else {
 			diceButton1.setBackground(Color.WHITE);
 		}
-		if(dices[1]==0) {
+		if(userinfo.dices[1]==0) {
 			diceButton2.setBackground(Color.LIGHT_GRAY);
 		}else {
 			diceButton2.setBackground(Color.WHITE);
 		}
-		if(dices[2]==0) {
+		if(userinfo.dices[2]==0) {
 			diceButton3.setBackground(Color.LIGHT_GRAY);
 		}else {
 			diceButton3.setBackground(Color.WHITE);
 		}
-		if(dices[3]==0) {
+		if(userinfo.dices[3]==0) {
 			diceButton4.setBackground(Color.LIGHT_GRAY);
 		}else {
 			diceButton4.setBackground(Color.WHITE);
 		}
-		if(dices[4]==0) {
+		if(userinfo.dices[4]==0) {
 			diceButton5.setBackground(Color.LIGHT_GRAY);
 		}else {
 			diceButton5.setBackground(Color.WHITE);
@@ -331,13 +345,13 @@ public class Layout extends JFrame implements Runnable{
 		imojibtn3.setBackground(Color.WHITE);
 		imojibtn4.setBackground(Color.WHITE);
 		
-		if(imoji ==1) {
+		if(userinfo.imoji ==1) {
 			imojibtn1.setBackground(Color.LIGHT_GRAY);
-		}else if(imoji == 2) {
+		}else if(userinfo.imoji == 2) {
 			imojibtn2.setBackground(Color.LIGHT_GRAY);
-		}else if(imoji == 3) {
+		}else if(userinfo.imoji == 3) {
 			imojibtn3.setBackground(Color.LIGHT_GRAY);
-		}else if(imoji == 4){
+		}else if(userinfo.imoji == 4){
 			imojibtn4.setBackground(Color.LIGHT_GRAY);
 		}
 		suitbtn1.setBackground(Color.WHITE);
@@ -352,29 +366,29 @@ public class Layout extends JFrame implements Runnable{
 		suitbtn10.setBackground(Color.WHITE);
 		suitbtn11.setBackground(Color.WHITE);
 		suitbtn12.setBackground(Color.WHITE);
-		if(suit == 0) {
+		if(userinfo.suit == 0) {
 			suitbtn1.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 1) {
+		}else if(userinfo.suit == 1) {
 			suitbtn2.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 2) {
+		}else if(userinfo.suit == 2) {
 			suitbtn3.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 3) {
+		}else if(userinfo.suit == 3) {
 			suitbtn4.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 4) {
+		}else if(userinfo.suit == 4) {
 			suitbtn5.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 5) {
+		}else if(userinfo.suit == 5) {
 			suitbtn6.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 6) {
+		}else if(userinfo.suit == 6) {
 			suitbtn7.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 7) {
+		}else if(userinfo.suit == 7) {
 			suitbtn8.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 8) {
+		}else if(userinfo.suit == 8) {
 			suitbtn9.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 9) {
+		}else if(userinfo.suit == 9) {
 			suitbtn10.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 10) {
+		}else if(userinfo.suit == 10) {
 			suitbtn11.setBackground(Color.LIGHT_GRAY);
-		}else if(suit == 11) {
+		}else if(userinfo.suit == 11) {
 			suitbtn12.setBackground(Color.LIGHT_GRAY);
 		}
 		diceButton1.setIcon(diceicon(yatch.play.dieces[0]));
@@ -398,14 +412,27 @@ public class Layout extends JFrame implements Runnable{
 			model.setValueAt(yatch.table[1][i++], j, 2);
 		}
 	}
+	public String Winner(int winner, int youare) {
+		if(winner == 0) {
+			return "Draw";
+		}
+		else if(winner == youare) {
+			return "You win";
+		}else {
+			return "You Lose";
+			}
+	}
 	@Override
 	public void run() {
 		
-		yatch.rolldice(dices);
 		// TODO Auto-generated method stub
 		Frame();
 		while (true) {
-			//값을 읽어오는 쓰래드를 실행시키는
+			if(yatch.turn==25) {
+				JOptionPane.showMessageDialog(null, Winner(yatch.winner(),userid));
+				System.exit(0);
+				
+			}
 			updates();
 			try {
 				Thread.sleep(500);
@@ -422,34 +449,36 @@ public class Layout extends JFrame implements Runnable{
 			String realcommand = command.substring(0, 3);
 			if(realcommand.equals("imo")) {
 				int a = Integer.parseInt(command.substring(3));
-				imoji = a;
-			}
-			if(realcommand.equals("dic")) {
-				int a = Integer.parseInt(command.substring(3));
-				if(dices[a] == 0) {
-					dices[a] = 1;
-				}else {
-					dices[a] = 0;
-				}
-			}
-			if(realcommand.equals("sui")) {
-				int a = Integer.parseInt(command.substring(3));
-				suit = a;
-			}
-			if(realcommand.equals("rol")) {
-				yatch.rolldice(dices);
-				
-			}
-			if(realcommand.equals("sio")) {
-				imoji = 0;
-			}
-			if(realcommand.equals("det")) {
-				if(suit == -1) {
+				userinfo.imoji = a;
+			}else if(realcommand.equals("sio")){
+				userinfo.actionString = command;
+			
+			}else if(userid == (2- yatch.turn%2)) {
+				if(realcommand.equals("dic")) {
+					int a = Integer.parseInt(command.substring(3));
+					if(userinfo.dices[a] == 0) {
+						userinfo.dices[a] = 1;
+					}else {
+						userinfo.dices[a] = 0;
+					}
+
+				}else if(realcommand.equals("sui")) {
+					int a = Integer.parseInt(command.substring(3));
+					userinfo.suit = a;
 					
-				}else {
-					yatch.pressscore(0,suit);
+				}else{
+					if((realcommand.equals("rol")&&yatch.rollchance<=0)) {
+						JOptionPane.showMessageDialog(null, "You're Already fully rolled");
+						
+					}else if(realcommand.equals("det")&&yatch.rollchance==3) {
+						JOptionPane.showMessageDialog(null, "You are not rolled");
+					}
+					else if(realcommand.equals("det")&&userinfo.tablefilled[userinfo.suit] == 1) {
+						JOptionPane.showMessageDialog(null, "Already Filled");
+					}else {
+					userinfo.actionString = command;
+					}
 				}
-				suit = -1;
 			}
 		}
 	}
