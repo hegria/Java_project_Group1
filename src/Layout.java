@@ -107,7 +107,7 @@ public class Layout extends JFrame implements Runnable{
 		imojibtn4.addActionListener(new ButtonClickListener());
 		panel_1.add(imojibtn4);
 		
-		JLabel lblNewLabel_5 = new JLabel("Choose Imoji");
+		JLabel lblNewLabel_5 = new JLabel("Choose Emoji");
 		panel.add(lblNewLabel_5, BorderLayout.NORTH);
 		
 		JButton sendimobtn = new JButton("Send");
@@ -123,9 +123,11 @@ public class Layout extends JFrame implements Runnable{
 		Object data[][] = {{"One",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Two",yatch.table[0][i],yatch.table[1][i++]},{"Three",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Four",yatch.table[0][i],yatch.table[1][i++]},{"Five",yatch.table[0][i],yatch.table[1][i++]}
-		,{"Six",yatch.table[0][i],yatch.table[1][i++]}
+		,{"Six",yatch.table[0][i],yatch.table[1][i++]},{
+			"SubTotal",yatch.table[0][14],yatch.table[1][14]
+		}
 		,{"Bonus",yatch.table[0][12],yatch.table[1][12]},{"Choice",yatch.table[0][i],yatch.table[1][i++]}
-		,{"FourOfkind",yatch.table[0][i],yatch.table[1][i++]},
+		,{"4 of a Kind",yatch.table[0][i],yatch.table[1][i++]},
 		{"S. Straight",yatch.table[0][i],yatch.table[1][i++]},{"L. Straight",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Full House",yatch.table[0][i],yatch.table[1][i++]}
 		,{"Yatch",yatch.table[0][i],yatch.table[1][i++]},{"Result",yatch.table[0][13],yatch.table[1][13]}};
@@ -205,7 +207,7 @@ public class Layout extends JFrame implements Runnable{
 		panel_right.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_6 = new JLabel("Choose Emoji");
+		JLabel lblNewLabel_6 = new JLabel("Choose suits");
 		panel_2.add(lblNewLabel_6, BorderLayout.NORTH);
 		
 		JPanel panel_3 = new JPanel();
@@ -248,12 +250,12 @@ public class Layout extends JFrame implements Runnable{
 		suitbtn7.addActionListener(new ButtonClickListener());
 		panel_3.add(suitbtn7);
 		
-		suitbtn8 = new JButton("Four of kind");
+		suitbtn8 = new JButton("Four of a kind");
 		suitbtn8.setActionCommand("sui7");
 		suitbtn8.addActionListener(new ButtonClickListener());
 		panel_3.add(suitbtn8);
 		
-		suitbtn9 = new JButton("S. Straight");
+		suitbtn9 = new JButton("Small Straight");
 		suitbtn9.setActionCommand("sui8");
 		suitbtn9.addActionListener(new ButtonClickListener());
 		panel_3.add(suitbtn9);
@@ -397,19 +399,32 @@ public class Layout extends JFrame implements Runnable{
 		diceButton4.setIcon(diceicon(yatch.play.dieces[3]));
 		diceButton5.setIcon(diceicon(yatch.play.dieces[4]));
 		int i =0;
-		for(int j =0; j<14;j++) {
+		for(int j =0; j<15;j++) {
 			if(j==6) {
-				model.setValueAt(yatch.table[0][12], j, 1);
-				model.setValueAt(yatch.table[1][12], j, 2);
+				model.setValueAt(Integer.toString((yatch.table[0][14]))+"/63", j, 1);
+				model.setValueAt(Integer.toString((yatch.table[1][14]))+"/63", j, 2);
 				continue;
 			}
-			if(j==13) {
-				model.setValueAt(yatch.table[0][13], j, 1);
-				model.setValueAt(yatch.table[1][13], j, 2);
+			if(j==7) {
+				model.setValueAt(retval(yatch.table[0][12]), j, 1);
+				model.setValueAt(retval(yatch.table[1][12]), j, 2);
+				continue;
+			
+			}
+			if(j==14) {
+				model.setValueAt(retval(yatch.table[0][13]), j, 1);
+				model.setValueAt(retval(yatch.table[1][13]), j, 2);
 				continue;
 			}
-			model.setValueAt(yatch.table[0][i], j, 1);
-			model.setValueAt(yatch.table[1][i++], j, 2);
+			model.setValueAt(retval(yatch.table[0][i]), j, 1);
+			model.setValueAt(retval(yatch.table[1][i++]), j, 2);
+		}
+	}
+	public Object retval(int i) {
+		if(i==-1) {
+			return null;
+		}else {
+			return i;
 		}
 	}
 	public String Winner(int winner, int youare) {
@@ -424,9 +439,21 @@ public class Layout extends JFrame implements Runnable{
 	}
 	@Override
 	public void run() {
-		
+		if(yatch.numofman != 2) {
+			JOptionPane.showMessageDialog(null, "Wait for people...");
+		}
+		while(true) {
+			if(yatch.numofman == 2) {
+				Frame();
+				break;
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO: handle exception
+			}
+		}
 		// TODO Auto-generated method stub
-		Frame();
 		while (true) {
 			if(yatch.turn==25) {
 				JOptionPane.showMessageDialog(null, Winner(yatch.winner(),userid));
@@ -455,13 +482,16 @@ public class Layout extends JFrame implements Runnable{
 			
 			}else if(userid == (2- yatch.turn%2)) {
 				if(realcommand.equals("dic")) {
-					int a = Integer.parseInt(command.substring(3));
-					if(userinfo.dices[a] == 0) {
-						userinfo.dices[a] = 1;
+					if(yatch.rollchance ==3) {
+						JOptionPane.showMessageDialog(null, "First roll must roll all dice");
 					}else {
-						userinfo.dices[a] = 0;
+						int a = Integer.parseInt(command.substring(3));
+						if(userinfo.dices[a] == 0) {
+							userinfo.dices[a] = 1;
+						}else {
+							userinfo.dices[a] = 0;
+						}
 					}
-
 				}else if(realcommand.equals("sui")) {
 					int a = Integer.parseInt(command.substring(3));
 					userinfo.suit = a;

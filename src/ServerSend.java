@@ -22,11 +22,11 @@ public class ServerSend extends Thread{
 				String message = "";
 					while(true) {
 
-							for(int i=0;i<28;i++) {
+							for(int i=0;i<30;i++) {
 								if(i == 0) {
 									message = Integer.toString(yatch.table[0][0]);
 								} else {
-									message = message + " " +Integer.toString(yatch.table[i/14][i%14]);
+									message = message + " " +Integer.toString(yatch.table[i/15][i%15]);
 									//System.out.println(Integer.toString(i/12)+Integer.toString(i%12)+Integer.toString(yatch.table[i/12][i%12]));
 								}
 							}
@@ -38,6 +38,7 @@ public class ServerSend extends Thread{
 							message = message + " " +Integer.toString(yatch.rollchance);
 							message = message + " " +Integer.toString(yatch.imoji[0]);
 							message = message + " " +Integer.toString(yatch.imoji[1]);
+							message = message + " " +Integer.toString(yatch.numofman);
 							out.write(message+"\n");
 							out.flush();
 						

@@ -21,6 +21,9 @@ public class Server {
 		}
 		while (true) {
 			try {
+			if(arr.size()==4) {
+				break;
+			}
 			Socket soc = ss.accept();
 			OutputStream os =soc.getOutputStream();
 			DataOutputStream dos =new DataOutputStream(os);
@@ -31,6 +34,7 @@ public class Server {
 			t2.start();
 			arr.add(t1);
 			arr.add(t2);
+			yatch.numofman++;
 			
 			} catch (IOException e) {
 				// TODO: handle exception

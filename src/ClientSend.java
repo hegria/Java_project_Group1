@@ -30,6 +30,9 @@ public class ClientSend extends Thread {
 						message = message +" "+ Integer.toString(userinfo.suit);
 						userinfo.tablefilled[userinfo.suit] = 1;
 						userinfo.suit = -1;
+						for(int i=0;i<5;i++) {
+							userinfo.dices[i] = 1;
+						}
 					}
 					if(userinfo.actionString.equals("rol")) {
 						for(int i =0;i<5;i++) {

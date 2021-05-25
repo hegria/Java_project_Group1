@@ -34,7 +34,7 @@ public class ClientReceive extends Thread{
 						for(int i =0;i<3;i++) {
 							yatch.rolldice(dices);
 							try {
-								Thread.sleep(600);
+								Thread.sleep(400);
 							} catch (InterruptedException e) {
 								// TODO: handle exception
 							}

@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class Yatch {
 	//전체 게임정보가 들어가야함
-	int table[][] = new int[2][14]; //13을 보너스로하고, 14를 총점으로?
+	int numofman = 0;
+	int table[][] = new int[2][15]; //13을 보너스로하고, 14를 총점으로?
  	Playing play = new Playing(); // dice정보만
 	int imoji[] = new int[2];
 	int turn; //1-24
@@ -12,6 +13,11 @@ public class Yatch {
 	Yatch(){
 		turn = 1;
 		rollchance = 3;
+		for(int i=0;i<2;i++) {
+			for(int j=0;j<13;j++) {
+				table[i][j]=-1;
+			}
+		}
 	}
 	void rolldice(int nums[]) {
 		Random random = new Random();
@@ -43,25 +49,19 @@ public class Yatch {
 		int isthree = 0;
 		int isfive = 0;
 		int istwo = 0;
-		boolean isSS = false; // 나중에 생각{0,0,1,1,1,1} 아이디어 필요
-		boolean isLS = false; // 나중에 생각{0,1,1,1,1,1}
 		for (int i=0;i<6;i++) {
 			boolean check=false;
 			if(numof[i]==4) {
 				isfour = 4*(i+1);
-				check =true;
 			}
 			if(numof[i]==3){
 				isthree =3*(i+1);
-				check =true;
 			}
 			if(numof[i]==2) {
 				istwo = 2*(i+1);
-				check =true;
 			}
 			if(numof[i]==5){
 				isfive =5*(i+1);
-				check =true;
 			}
 			if(numof[i]==1) {
 				isone =(i+1);
@@ -69,7 +69,7 @@ public class Yatch {
 			}
 			if(check) {
 				if(i==0)
-					iss[i]++;
+					iss[0] = 1;
 				else
 					iss[i]=iss[i-1]+1;
 			}
@@ -97,15 +97,19 @@ public class Yatch {
 		table[player][suits] = play.suits[suits];
 		int total = 0;
 		int subtotal = 0;
-		for (int i =0;i<13;i++) {
-			total += table[player][i];
-		}
+
 		for (int i=0;i<6;i++) {
-			subtotal += table[player][i];
+			if(table[player][i]!=-1)
+				subtotal += table[player][i];
 		}
 		if(subtotal>=63) {
 			table[player][12] = 35;
 		}
+		for (int i =0;i<13;i++) {
+			if(table[player][i]!=-1)
+				total += table[player][i];
+		}
+		table[player][14] = subtotal;
 		table[player][13] = total;
 		
 	}

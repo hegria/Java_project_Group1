@@ -20,16 +20,17 @@ public class ServerReceive extends Thread {
 			while (true) {
 				message = in.readLine();
 				Code = message.split(" ");
-				for(int i =0;i<28;i++) {
-					yatch.table[i/14][i%14] = Integer.parseInt(Code[i]);
+				for(int i =0;i<30;i++) {
+					yatch.table[i/15][i%15] = Integer.parseInt(Code[i]);
 				}
 				for(int i=0;i<5;i++) {
-					yatch.play.dieces[i] = Integer.parseInt(Code[28+i]);
+					yatch.play.dieces[i] = Integer.parseInt(Code[30+i]);
 				}
-				yatch.turn = Integer.parseInt(Code[33]);
-				yatch.rollchance = Integer.parseInt(Code[34]);
-				yatch.imoji[0] = Integer.parseInt(Code[35]);
-				yatch.imoji[1] = Integer.parseInt(Code[36]);
+				yatch.turn = Integer.parseInt(Code[35]);
+				yatch.rollchance = Integer.parseInt(Code[36]);
+				yatch.imoji[0] = Integer.parseInt(Code[37]);
+				yatch.imoji[1] = Integer.parseInt(Code[38]);
+				yatch.numofman = Integer.parseInt(Code[39]);
 			}
 		} catch (IOException e) {
 			// TODO: handle exception
