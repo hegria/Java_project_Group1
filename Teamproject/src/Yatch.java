@@ -79,8 +79,13 @@ public class Yatch {
 	// suits는 버튼에 지정된 값 (족보 몇번째껄로 할건지)
 	void pressscore(int player,int suits) {
 		table[player][suits] = play.suits[suits];
-		System.out.println(table[player][suits]);
+		
+		
 		// 합구애야함
+	}
+	void turnover() {
+		turn++;
+		
 	}
 }
 
