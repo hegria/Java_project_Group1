@@ -36,8 +36,8 @@ public class ServerSend extends Thread{
 							}
 							message = message + " " +Integer.toString(yatch.turn);
 							message = message + " " +Integer.toString(yatch.rollchance);
-							message = message + " " +Integer.toString(yatch.imoji[0]);
-							message = message + " " +Integer.toString(yatch.imoji[1]);
+							message = message + " " +Integer.toString(yatch.emoji[0]);
+							message = message + " " +Integer.toString(yatch.emoji[1]);
 							message = message + " " +Integer.toString(yatch.numofman);
 							out.write(message+"\n");
 							out.flush();

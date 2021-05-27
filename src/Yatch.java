@@ -7,7 +7,7 @@ public class Yatch {
 	int numofman = 0;
 	int table[][] = new int[2][15]; //13을 보너스로하고, 14를 총점으로?
  	Playing play = new Playing(); // dice정보만
-	int imoji[] = new int[2];
+	int emoji[] = new int[2];
 	int turn; //1-24
 	int rollchance; // 갱신
 	Yatch(){

@@ -22,7 +22,7 @@ public class ClientReceive extends Thread{
 				int id = Integer.parseInt(Code[0]);
 				int dices[] = new int[5];
 				int suit;
-				int imoji;
+				int emoji;
 				String command = Code[1];
 				String realcommand = command.substring(0, 3);
 				
@@ -43,8 +43,8 @@ public class ClientReceive extends Thread{
 					}
 				}
 				if(realcommand.equals("sio")) {
-					imoji = Integer.parseInt(Code[2]);
-					Thread t = new SetIcon(yatch, id-1, imoji);
+					emoji = Integer.parseInt(Code[2]);
+					Thread t = new SetIcon(yatch, id-1, emoji);
 					t.start();
 				}
 				if(realcommand.equals("det")) {

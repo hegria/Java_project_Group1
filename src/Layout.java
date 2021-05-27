@@ -41,10 +41,10 @@ public class Layout extends JFrame implements Runnable{
 	JButton diceButton3;
 	JButton diceButton4;
 	JButton diceButton5;
-	JButton imojibtn1;
-	JButton imojibtn2;
-	JButton imojibtn3;
-	JButton imojibtn4;
+	JButton emojibtn1;
+	JButton emojibtn2;
+	JButton emojibtn3;
+	JButton emojibtn4;
 	JButton suitbtn1;
 	JButton suitbtn2;
 	JButton suitbtn3;
@@ -87,33 +87,33 @@ public class Layout extends JFrame implements Runnable{
 		panel.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(1, 3, 0, 0));
 		
-		imojibtn1 = new JButton(imojIcon(1));
-		imojibtn1.setActionCommand("imo1");
-		imojibtn1.addActionListener(new ButtonClickListener());
-		panel_1.add(imojibtn1);
+		emojibtn1 = new JButton(emojIcon(1));
+		emojibtn1.setActionCommand("emo1");
+		emojibtn1.addActionListener(new ButtonClickListener());
+		panel_1.add(emojibtn1);
 
-		imojibtn2 = new JButton(imojIcon(2));
-		imojibtn2.setActionCommand("imo2");
-		imojibtn2.addActionListener(new ButtonClickListener());
-		panel_1.add(imojibtn2);
+		emojibtn2 = new JButton(emojIcon(2));
+		emojibtn2.setActionCommand("emo2");
+		emojibtn2.addActionListener(new ButtonClickListener());
+		panel_1.add(emojibtn2);
 
-		imojibtn3 = new JButton(imojIcon(3));
-		imojibtn3.setActionCommand("imo3");
-		imojibtn3.addActionListener(new ButtonClickListener());
-		panel_1.add(imojibtn3);
+		emojibtn3 = new JButton(emojIcon(3));
+		emojibtn3.setActionCommand("emo3");
+		emojibtn3.addActionListener(new ButtonClickListener());
+		panel_1.add(emojibtn3);
 
-		imojibtn4 = new JButton(imojIcon(4));
-		imojibtn4.setActionCommand("imo4");
-		imojibtn4.addActionListener(new ButtonClickListener());
-		panel_1.add(imojibtn4);
+		emojibtn4 = new JButton(emojIcon(4));
+		emojibtn4.setActionCommand("emo4");
+		emojibtn4.addActionListener(new ButtonClickListener());
+		panel_1.add(emojibtn4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Choose Emoji");
 		panel.add(lblNewLabel_5, BorderLayout.NORTH);
 		
-		JButton sendimobtn = new JButton("Send");
-		sendimobtn.setActionCommand("sio");
-		sendimobtn.addActionListener(new ButtonClickListener());
-		panel.add(sendimobtn, BorderLayout.SOUTH);
+		JButton sendemobtn = new JButton("Send");
+		sendemobtn.setActionCommand("sio");
+		sendemobtn.addActionListener(new ButtonClickListener());
+		panel.add(sendemobtn, BorderLayout.SOUTH);
 		
 		JPanel dicepanel = new JPanel();
 		dicepanel.setLayout(new BorderLayout());
@@ -165,25 +165,25 @@ public class Layout extends JFrame implements Runnable{
 		JPanel tablepanel = new JPanel();
 		tablepanel.setLayout(new BorderLayout(0, 0));
 		panel_left.setLayout(new BorderLayout(0,0));
-		JPanel imojipanel = new JPanel();
-		imojipanel.setLayout(new BorderLayout(0, 0));
+		JPanel emojipanel = new JPanel();
+		emojipanel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel_2 = new JLabel("Emoji");
-		imojipanel.add(lblNewLabel_2, BorderLayout.NORTH);
+		emojipanel.add(lblNewLabel_2, BorderLayout.NORTH);
 		
 		JLabel lblNewLabel_3 = new JLabel("Player1");
-		imojipanel.add(lblNewLabel_3, BorderLayout.WEST);
+		emojipanel.add(lblNewLabel_3, BorderLayout.WEST);
 		
 		JLabel lblNewLabel_4 = new JLabel("Player2");
-		imojipanel.add(lblNewLabel_4, BorderLayout.EAST);
+		emojipanel.add(lblNewLabel_4, BorderLayout.EAST);
 		JPanel emojibottomPanel = new JPanel();
 		emojibottomPanel.setLayout(new BorderLayout(0,0));
-		player1EmoLabel = new JLabel(imojIcon(0));
-		player2EmoLabel = new JLabel(imojIcon(0));
+		player1EmoLabel = new JLabel(emojIcon(0));
+		player2EmoLabel = new JLabel(emojIcon(0));
 		emojibottomPanel.add(player1EmoLabel,BorderLayout.WEST);
 		emojibottomPanel.add(player2EmoLabel,BorderLayout.EAST);
-		imojipanel.add(emojibottomPanel,BorderLayout.SOUTH);
-		panel_left.add(imojipanel,BorderLayout.NORTH);
+		emojipanel.add(emojibottomPanel,BorderLayout.SOUTH);
+		panel_left.add(emojipanel,BorderLayout.NORTH);
 		JPanel dicepanel2 = new JPanel();
 		dicepanel2.setLayout(new BorderLayout(0,0));
 		
@@ -301,7 +301,7 @@ public class Layout extends JFrame implements Runnable{
 		ImageIcon icon = new ImageIcon(chagedimg);
 		return icon;
 	}
-	public ImageIcon imojIcon(int i) {
+	public ImageIcon emojIcon(int i) {
 		ImageIcon img = new ImageIcon("img/emoji"+Integer.toString(i)+".png");
 		Image orignimg = img.getImage();
 		Image chagedimg = orignimg.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
@@ -309,8 +309,8 @@ public class Layout extends JFrame implements Runnable{
 		return icon;
 	}
 	public void updates() {
-		player1EmoLabel.setIcon(imojIcon(yatch.imoji[0]));
-		player2EmoLabel.setIcon(imojIcon(yatch.imoji[1]));
+		player1EmoLabel.setIcon(emojIcon(yatch.emoji[0]));
+		player2EmoLabel.setIcon(emojIcon(yatch.emoji[1]));
 		player1EmoLabel.setBackground(Color.WHITE);
 		player2EmoLabel.setBackground(Color.WHITE);
 		restofLabel.setText(Integer.toString(yatch.rollchance)+" turns left");
@@ -342,19 +342,19 @@ public class Layout extends JFrame implements Runnable{
 			diceButton5.setBackground(Color.WHITE);
 		}
 		
-		imojibtn1.setBackground(Color.WHITE);
-		imojibtn2.setBackground(Color.WHITE);
-		imojibtn3.setBackground(Color.WHITE);
-		imojibtn4.setBackground(Color.WHITE);
+		emojibtn1.setBackground(Color.WHITE);
+		emojibtn2.setBackground(Color.WHITE);
+		emojibtn3.setBackground(Color.WHITE);
+		emojibtn4.setBackground(Color.WHITE);
 		
-		if(userinfo.imoji ==1) {
-			imojibtn1.setBackground(Color.LIGHT_GRAY);
-		}else if(userinfo.imoji == 2) {
-			imojibtn2.setBackground(Color.LIGHT_GRAY);
-		}else if(userinfo.imoji == 3) {
-			imojibtn3.setBackground(Color.LIGHT_GRAY);
-		}else if(userinfo.imoji == 4){
-			imojibtn4.setBackground(Color.LIGHT_GRAY);
+		if(userinfo.emoji ==1) {
+			emojibtn1.setBackground(Color.LIGHT_GRAY);
+		}else if(userinfo.emoji == 2) {
+			emojibtn2.setBackground(Color.LIGHT_GRAY);
+		}else if(userinfo.emoji == 3) {
+			emojibtn3.setBackground(Color.LIGHT_GRAY);
+		}else if(userinfo.emoji == 4){
+			emojibtn4.setBackground(Color.LIGHT_GRAY);
 		}
 		suitbtn1.setBackground(Color.WHITE);
 		suitbtn2.setBackground(Color.WHITE);
@@ -474,9 +474,9 @@ public class Layout extends JFrame implements Runnable{
 			// TODO Auto-generated method stub
 			String command = e.getActionCommand();
 			String realcommand = command.substring(0, 3);
-			if(realcommand.equals("imo")) {
+			if(realcommand.equals("emo")) {
 				int a = Integer.parseInt(command.substring(3));
-				userinfo.imoji = a;
+				userinfo.emoji = a;
 			}else if(realcommand.equals("sio")){
 				userinfo.actionString = command;
 			

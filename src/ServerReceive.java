@@ -28,8 +28,8 @@ public class ServerReceive extends Thread {
 				}
 				yatch.turn = Integer.parseInt(Code[35]);
 				yatch.rollchance = Integer.parseInt(Code[36]);
-				yatch.imoji[0] = Integer.parseInt(Code[37]);
-				yatch.imoji[1] = Integer.parseInt(Code[38]);
+				yatch.emoji[0] = Integer.parseInt(Code[37]);
+				yatch.emoji[1] = Integer.parseInt(Code[38]);
 				yatch.numofman = Integer.parseInt(Code[39]);
 			}
 		} catch (IOException e) {

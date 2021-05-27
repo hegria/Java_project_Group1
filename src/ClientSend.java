@@ -23,8 +23,8 @@ public class ClientSend extends Thread {
 				if(!userinfo.actionString.equals("")) {
 					message = Integer.toString(userid)+" "+userinfo.actionString;
 					if(userinfo.actionString.equals("sio")) {
-						message = message +" "+ Integer.toString(userinfo.imoji);
-						userinfo.imoji = 0;
+						message = message +" "+ Integer.toString(userinfo.emoji);
+						userinfo.emoji = 0;
 					}
 					if(userinfo.actionString.equals("det")) {
 						message = message +" "+ Integer.toString(userinfo.suit);
