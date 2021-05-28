@@ -9,12 +9,12 @@ public class Client {
 		DataInputStream dis =new DataInputStream(client.getInputStream());
 		int id = dis.read();
 		Yatch yatch = new Yatch();
-		String a = "";
+		yatch.numofman = id;
 		Userinfo user = new Userinfo();
 		Thread recieve = new ServerReceive(client, yatch);
-		System.out.println("I'm"+Integer.toString(id));
+		System.out.println("Connected! I'm player"+Integer.toString(id));
 		Layout layout = new Layout(yatch, id, user);
-		Thread draw = new Thread(layout);
+		Thread draw = new Thread(layout); // layout은 runnable이기때문에
 		Thread send = new ClientSend(client, user, id);
 		send.start();
 		recieve.start();

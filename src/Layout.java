@@ -28,13 +28,13 @@ import java.awt.event.ActionEvent;
 
 public class Layout extends JFrame implements Runnable{
 	Yatch yatch;
-	int userid;
-	int myinfo;
+	int userid; // Player를 나눌거임.
+	int myinfo; // ??
 	Userinfo userinfo;
-	String action;
+	String action; // actionstring 이거는 layout에서 쓸거.
 	DefaultTableModel model;
 	Object data[][];
-	JLabel nowturn;
+	JLabel nowturn; // 실시간으로 바뀌어야할것들.
 	JLabel nowturnnum;
 	JButton diceButton1;
 	JButton diceButton2;
@@ -89,30 +89,30 @@ public class Layout extends JFrame implements Runnable{
 		
 		emojibtn1 = new JButton(emojIcon(1));
 		emojibtn1.setActionCommand("emo1");
-		emojibtn1.addActionListener(new ButtonClickListener());
+		emojibtn1.addActionListener(new ButtonClickListener(this));
 		panel_1.add(emojibtn1);
 
 		emojibtn2 = new JButton(emojIcon(2));
 		emojibtn2.setActionCommand("emo2");
-		emojibtn2.addActionListener(new ButtonClickListener());
+		emojibtn2.addActionListener(new ButtonClickListener(this));
 		panel_1.add(emojibtn2);
 
 		emojibtn3 = new JButton(emojIcon(3));
 		emojibtn3.setActionCommand("emo3");
-		emojibtn3.addActionListener(new ButtonClickListener());
+		emojibtn3.addActionListener(new ButtonClickListener(this));
 		panel_1.add(emojibtn3);
 
 		emojibtn4 = new JButton(emojIcon(4));
 		emojibtn4.setActionCommand("emo4");
-		emojibtn4.addActionListener(new ButtonClickListener());
+		emojibtn4.addActionListener(new ButtonClickListener(this));
 		panel_1.add(emojibtn4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Choose Emoji");
 		panel.add(lblNewLabel_5, BorderLayout.NORTH);
 		
 		JButton sendemobtn = new JButton("Send");
-		sendemobtn.setActionCommand("sio");
-		sendemobtn.addActionListener(new ButtonClickListener());
+		sendemobtn.setActionCommand("sem");
+		sendemobtn.addActionListener(new ButtonClickListener(this));
 		panel.add(sendemobtn, BorderLayout.SOUTH);
 		
 		JPanel dicepanel = new JPanel();
@@ -136,28 +136,28 @@ public class Layout extends JFrame implements Runnable{
 		rowofdice.setLayout(new GridLayout(1, 5));
 		diceButton1 = new JButton(diceicon(yatch.play.dieces[0]));
 		diceButton1.setActionCommand("dic0");
-		diceButton1.addActionListener(new ButtonClickListener());
+		diceButton1.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton1,BorderLayout.CENTER);
 
 		
 		diceButton2 = new JButton(diceicon(yatch.play.dieces[1]));
 		diceButton2.setActionCommand("dic1");
-		diceButton2.addActionListener(new ButtonClickListener());
+		diceButton2.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton2);
 		
 		diceButton3 = new JButton(diceicon(yatch.play.dieces[2]));
 		diceButton3.setActionCommand("dic2");
-		diceButton3.addActionListener(new ButtonClickListener());
+		diceButton3.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton3);
 		
 		diceButton4 = new JButton(diceicon(yatch.play.dieces[3]));
 		diceButton4.setActionCommand("dic3");
-		diceButton4.addActionListener(new ButtonClickListener());
+		diceButton4.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton4);
 		
 		diceButton5 = new JButton(diceicon(yatch.play.dieces[4]));
 		diceButton5.setActionCommand("dic4");
-		diceButton5.addActionListener(new ButtonClickListener());
+		diceButton5.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton5);
 		
 		dicepanel.add(rowofdice);
@@ -198,7 +198,7 @@ public class Layout extends JFrame implements Runnable{
 		dicepanel.add(dicepanel2,BorderLayout.NORTH);
 		JButton rollbtn = new JButton("Roll");
 		rollbtn.setActionCommand("rol");
-		rollbtn.addActionListener(new ButtonClickListener());
+		rollbtn.addActionListener(new ButtonClickListener(this));
 		dicepanel.add(rollbtn,BorderLayout.SOUTH);
 		
 		panel_right.add(dicepanel);
@@ -216,68 +216,68 @@ public class Layout extends JFrame implements Runnable{
 		
 		suitbtn1 = new JButton("One");
 		suitbtn1.setActionCommand("sui0");
-		suitbtn1.addActionListener(new ButtonClickListener());
+		suitbtn1.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn1);
 		
 		suitbtn2 = new JButton("Two");
 		suitbtn2.setActionCommand("sui1");
-		suitbtn2.addActionListener(new ButtonClickListener());
+		suitbtn2.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn2);
 		
 		suitbtn3 = new JButton("Three");
 		suitbtn3.setActionCommand("sui2");
-		suitbtn3.addActionListener(new ButtonClickListener());
+		suitbtn3.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn3);
 		
 		suitbtn4 = new JButton("Four");
 		suitbtn4.setActionCommand("sui3");
-		suitbtn4.addActionListener(new ButtonClickListener());
+		suitbtn4.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn4);
 		
 		suitbtn5 = new JButton("Five");
 		suitbtn5.setActionCommand("sui4");
-		suitbtn5.addActionListener(new ButtonClickListener());
+		suitbtn5.addActionListener(new ButtonClickListener(this));
 		
 		panel_3.add(suitbtn5);
 		
 		suitbtn6 = new JButton("Six");
 		suitbtn6.setActionCommand("sui5");
-		suitbtn6.addActionListener(new ButtonClickListener());
+		suitbtn6.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn6);
 		
 		suitbtn7 = new JButton("Choice");
 		suitbtn7.setActionCommand("sui6");
-		suitbtn7.addActionListener(new ButtonClickListener());
+		suitbtn7.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn7);
 		
 		suitbtn8 = new JButton("Four of a kind");
 		suitbtn8.setActionCommand("sui7");
-		suitbtn8.addActionListener(new ButtonClickListener());
+		suitbtn8.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn8);
 		
 		suitbtn9 = new JButton("Small Straight");
 		suitbtn9.setActionCommand("sui8");
-		suitbtn9.addActionListener(new ButtonClickListener());
+		suitbtn9.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn9);
 		
 		suitbtn10 = new JButton("Large Straight");
 		suitbtn10.setActionCommand("sui9");
-		suitbtn10.addActionListener(new ButtonClickListener());
+		suitbtn10.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn10);
 		
 		suitbtn11 = new JButton("Full House");
 		suitbtn11.setActionCommand("sui10");
-		suitbtn11.addActionListener(new ButtonClickListener());
+		suitbtn11.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn11);
 		
 		suitbtn12 = new JButton("Yatch");
 		suitbtn12.setActionCommand("sui11");
-		suitbtn12.addActionListener(new ButtonClickListener());
+		suitbtn12.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn12);
 		
 		JButton sendbtn = new JButton("Send");
 		sendbtn.setActionCommand("det");
-		sendbtn.addActionListener(new ButtonClickListener());
+		sendbtn.addActionListener(new ButtonClickListener(this));
 		panel_2.add(sendbtn, BorderLayout.SOUTH);
 		JTable table = new JTable(model);
 		tablepanel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -444,7 +444,7 @@ public class Layout extends JFrame implements Runnable{
 		}
 		while(true) {
 			if(yatch.numofman == 2) {
-				Frame();
+				Frame(); // 한번밖에 실행이안됨
 				break;
 			}
 			try {
@@ -452,23 +452,27 @@ public class Layout extends JFrame implements Runnable{
 			} catch (InterruptedException e) {
 				// TODO: handle exception
 			}
-		}
+		} // 두명이 뜰때까지 기다리는 과정임
 		// TODO Auto-generated method stub
 		while (true) {
-			if(yatch.turn==25) {
-				JOptionPane.showMessageDialog(null, Winner(yatch.winner(),userid));
-				System.exit(0);
-				
-			}
 			updates();
+			if(yatch.turn==25) {
+				JOptionPane.showMessageDialog(this, Winner(yatch.winner(),userid));
+				System.exit(0);
+			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(400);
 			} catch (InterruptedException e) {
 				// TODO: handle exception
 			}
 		}
 	}
 	class ButtonClickListener implements ActionListener{
+		JFrame jframe;
+		public ButtonClickListener(JFrame jFrame) {
+			this.jframe = jFrame;
+			// TODO Auto-generated constructor stub
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
@@ -477,13 +481,13 @@ public class Layout extends JFrame implements Runnable{
 			if(realcommand.equals("emo")) {
 				int a = Integer.parseInt(command.substring(3));
 				userinfo.emoji = a;
-			}else if(realcommand.equals("sio")){
+			}else if(realcommand.equals("sem")){
 				userinfo.actionString = command;
 			
-			}else if(userid == (2- yatch.turn%2)) {
+			}else if(userid == (2- yatch.turn%2)) { // 버튼씹는거
 				if(realcommand.equals("dic")) {
 					if(yatch.rollchance ==3) {
-						JOptionPane.showMessageDialog(null, "First roll must roll all dice");
+						JOptionPane.showMessageDialog(jframe, "First roll must roll all dice");
 					}else {
 						int a = Integer.parseInt(command.substring(3));
 						if(userinfo.dices[a] == 0) {
@@ -498,15 +502,15 @@ public class Layout extends JFrame implements Runnable{
 					
 				}else{
 					if((realcommand.equals("rol")&&yatch.rollchance<=0)) {
-						JOptionPane.showMessageDialog(null, "You're Already fully rolled");
+						JOptionPane.showMessageDialog(jframe, "You're Already fully rolled");
 						
 					}else if(realcommand.equals("det")&&yatch.rollchance==3) {
-						JOptionPane.showMessageDialog(null, "You are not rolled");
+						JOptionPane.showMessageDialog(jframe, "You are not rolled");
 					}
 					else if(realcommand.equals("det")&&userinfo.tablefilled[userinfo.suit] == 1) {
-						JOptionPane.showMessageDialog(null, "Already Filled");
+						JOptionPane.showMessageDialog(jframe, "Already Filled");
 					}else {
-					userinfo.actionString = command;
+					userinfo.actionString = command; // 이게 지정되면 clientsend가 일을하는거라서 마지막에 진짜 결정됬을때 실행된다.
 					}
 				}
 			}

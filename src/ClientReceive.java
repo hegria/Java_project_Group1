@@ -30,19 +30,19 @@ public class ClientReceive extends Thread{
 					for(int i=0; i<5;i++) {
 						dices[i] = Integer.parseInt(Code[2+i]);
 					}
-					if(yatch.rollchance >0) {
-						for(int i =0;i<3;i++) {
-							yatch.rolldice(dices);
-							try {
-								Thread.sleep(400);
-							} catch (InterruptedException e) {
-								// TODO: handle exception
-							}
+					
+					for(int i =0;i<3;i++) {
+						yatch.rolldice(dices);
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+							// TODO: handle exception
 						}
-						yatch.rollchance--;
 					}
+					yatch.rollchance--;
+					
 				}
-				if(realcommand.equals("sio")) {
+				if(realcommand.equals("sem")) {
 					emoji = Integer.parseInt(Code[2]);
 					Thread t = new SetIcon(yatch, id-1, emoji);
 					t.start();

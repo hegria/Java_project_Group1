@@ -4,14 +4,12 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class ServerSend extends Thread{
+public class ServerSend extends Thread{ // SERVER의 Yatch정보를 encode해서 client한테 쏜다.
 	private Socket server;
 	private Yatch yatch;
-	int userid;
-	public ServerSend(Socket soc, Yatch yat, int userid) {
+	public ServerSend(Socket soc, Yatch yat) {
 		this.server = soc;
 		this.yatch = yat;
-		this.userid = userid;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -19,7 +17,7 @@ public class ServerSend extends Thread{
 		
 			try {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(server.getOutputStream()));
-				String message = "";
+				String message = ""; // Yatch정보를 encode한 게 될거임. 보내지는 거겠지..
 					while(true) {
 
 							for(int i=0;i<30;i++) {
@@ -39,7 +37,7 @@ public class ServerSend extends Thread{
 							message = message + " " +Integer.toString(yatch.emoji[0]);
 							message = message + " " +Integer.toString(yatch.emoji[1]);
 							message = message + " " +Integer.toString(yatch.numofman);
-							out.write(message+"\n");
+							out.write(message+"\n"); // nextlien으로 바꿀꺼니 overload방지..
 							out.flush();
 						
 						try {

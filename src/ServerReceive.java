@@ -7,7 +7,7 @@ import java.net.Socket;
 public class ServerReceive extends Thread {
 	private Socket server;
 	private Yatch yatch;
-	String[] Code;
+	String[] Code; // " "로 다 짜름..
 	public ServerReceive(Socket socket, Yatch yatch) {
 		this.server = socket;
 		this.yatch = yatch;
