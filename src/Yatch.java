@@ -35,7 +35,6 @@ public class Yatch {
 		for(int i =0;i<12 ;i++) {
 			play.suits[i] = 0;
 		}
-		play.suits[6] = 0;
 		for (int i =0; i<5;i++) {
 			numof[play.dieces[i]]++;
 			
@@ -69,7 +68,9 @@ public class Yatch {
 			}
 			if(numof[i]==1) {
 				isone =(i+1);
-				check =true;
+			}
+			if(numof[i]!=0) {
+				check = true;
 			}
 			if(check) {
 				if(i==0)
