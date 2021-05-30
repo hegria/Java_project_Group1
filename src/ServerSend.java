@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class ServerSend extends Thread{ // SERVER의 Yatch정보를 encode해서 client한테 쏜다.
+public class ServerSend extends Thread{ // SERVER의 yacht정보를 encode해서 client한테 쏜다.
 	private Socket server;
-	private Yacht yatch;
+	private Yacht yacht;
 	public ServerSend(Socket soc, Yacht yat) {
 		this.server = soc;
-		this.yatch = yat;
+		this.yacht = yat;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -17,26 +17,26 @@ public class ServerSend extends Thread{ // SERVER의 Yatch정보를 encode해서 clien
 		
 			try {
 				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(server.getOutputStream()));
-				String message = ""; // Yatch정보를 encode한 게 될거임. 보내지는 거겠지..
+				String message = ""; // yacht정보를 encode한 게 될거임. 보내지는 거겠지..
 					while(true) {
 
 							for(int i=0;i<30;i++) {
 								if(i == 0) {
-									message = Integer.toString(yatch.table[0][0]);
+									message = Integer.toString(yacht.table[0][0]);
 								} else {
-									message = message + " " +Integer.toString(yatch.table[i/15][i%15]);
-									//System.out.println(Integer.toString(i/12)+Integer.toString(i%12)+Integer.toString(yatch.table[i/12][i%12]));
+									message = message + " " +Integer.toString(yacht.table[i/15][i%15]);
+									//System.out.println(Integer.toString(i/12)+Integer.toString(i%12)+Integer.toString(yacht.table[i/12][i%12]));
 								}
 							}
 							for(int i=0;i<5;i++) {
-								message = message + " " +Integer.toString(yatch.play.dieces[i]);
+								message = message + " " +Integer.toString(yacht.play.dieces[i]);
 								
 							}
-							message = message + " " +Integer.toString(yatch.turn);
-							message = message + " " +Integer.toString(yatch.rollchance);
-							message = message + " " +Integer.toString(yatch.emoji[0]);
-							message = message + " " +Integer.toString(yatch.emoji[1]);
-							message = message + " " +Integer.toString(yatch.numofman);
+							message = message + " " +Integer.toString(yacht.turn);
+							message = message + " " +Integer.toString(yacht.rollchance);
+							message = message + " " +Integer.toString(yacht.emoji[0]);
+							message = message + " " +Integer.toString(yacht.emoji[1]);
+							message = message + " " +Integer.toString(yacht.numofman);
 							out.write(message+"\n"); // nextlien으로 바꿀꺼니 overload방지..
 							out.flush();
 						

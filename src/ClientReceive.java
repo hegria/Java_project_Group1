@@ -5,11 +5,11 @@ import java.net.Socket;
 
 public class ClientReceive extends Thread{
 	private Socket server;
-	private Yacht yatch;
+	private Yacht yacht;
 	String[] Code;
-	public ClientReceive(Socket socket,Yacht yatch) {
+	public ClientReceive(Socket socket,Yacht yacht) {
 		this.server = socket;
-		this.yatch = yatch;
+		this.yacht = yacht;
 	}
 	public void run() {
 		// TODO Auto-generated method stub
@@ -32,25 +32,25 @@ public class ClientReceive extends Thread{
 					}
 					
 					for(int i =0;i<3;i++) {
-						yatch.rolldice(dices);
+						yacht.rolldice(dices);
 						try {
 							Thread.sleep(500);
 						} catch (InterruptedException e) {
 							// TODO: handle exception
 						}
 					}
-					yatch.rollchance--;
+					yacht.rollchance--;
 					
 				}
 				if(realcommand.equals("sem")) {
 					emoji = Integer.parseInt(Code[2]);
-					Thread t = new SetIcon(yatch, id-1, emoji);
+					Thread t = new SetIcon(yacht, id-1, emoji);
 					t.start();
 				}
 				if(realcommand.equals("det")) {
 					suit = Integer.parseInt(Code[2]);
-					yatch.pressscore(id-1,suit);
-					yatch.turnover();
+					yacht.pressscore(id-1,suit);
+					yacht.turnover();
 
 				}
 					

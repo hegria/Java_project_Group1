@@ -27,7 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Layout extends JFrame implements Runnable{
-	Yacht yatch;
+	Yacht yacht;
 	int userid; // Player를 나눌거임.
 	int myinfo; // ??
 	Userinfo userinfo;
@@ -60,8 +60,8 @@ public class Layout extends JFrame implements Runnable{
 	JLabel restofLabel;
 	JLabel player1EmoLabel;
 	JLabel player2EmoLabel;
-	public Layout(Yacht yatch,int userid, Userinfo userinfo) {
-		this.yatch = yatch; 
+	public Layout(Yacht yacht,int userid, Userinfo userinfo) {
+		this.yacht = yacht; 
 		this.userid = userid;
 		this.userinfo = userinfo;
 		// TODO Auto-generated constructor stub
@@ -73,7 +73,7 @@ public class Layout extends JFrame implements Runnable{
 		panelturns.setLayout(new BorderLayout(0,0));
 		nowturn = new JLabel("Player 1's turn");
 		panelturns.add(nowturn,BorderLayout.WEST);
-		nowturnnum = new JLabel(Integer.toString(yatch.turn)+"/12");
+		nowturnnum = new JLabel(Integer.toString(yacht.turn)+"/12");
 		panelturns.add(nowturnnum,BorderLayout.EAST);
 		JPanel panel_right = new JPanel();
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,panel_left,panel_right);
@@ -120,42 +120,42 @@ public class Layout extends JFrame implements Runnable{
 		
 		int i = 0;
 		String title[] = {"Suits","Player1","Player2"};
-		Object data[][] = {{"One",yatch.table[0][i],yatch.table[1][i++]}
-		,{"Two",yatch.table[0][i],yatch.table[1][i++]},{"Three",yatch.table[0][i],yatch.table[1][i++]}
-		,{"Four",yatch.table[0][i],yatch.table[1][i++]},{"Five",yatch.table[0][i],yatch.table[1][i++]}
-		,{"Six",yatch.table[0][i],yatch.table[1][i++]},{
-			"SubTotal",yatch.table[0][14],yatch.table[1][14]
+		Object data[][] = {{"One",yacht.table[0][i],yacht.table[1][i++]}
+		,{"Two",yacht.table[0][i],yacht.table[1][i++]},{"Three",yacht.table[0][i],yacht.table[1][i++]}
+		,{"Four",yacht.table[0][i],yacht.table[1][i++]},{"Five",yacht.table[0][i],yacht.table[1][i++]}
+		,{"Six",yacht.table[0][i],yacht.table[1][i++]},{
+			"SubTotal",yacht.table[0][14],yacht.table[1][14]
 		}
-		,{"Bonus",yatch.table[0][12],yatch.table[1][12]},{"Choice",yatch.table[0][i],yatch.table[1][i++]}
-		,{"4 of a Kind",yatch.table[0][i],yatch.table[1][i++]},
-		{"S. Straight",yatch.table[0][i],yatch.table[1][i++]},{"L. Straight",yatch.table[0][i],yatch.table[1][i++]}
-		,{"Full House",yatch.table[0][i],yatch.table[1][i++]}
-		,{"Yatch",yatch.table[0][i],yatch.table[1][i++]},{"Result",yatch.table[0][13],yatch.table[1][13]}};
+		,{"Bonus",yacht.table[0][12],yacht.table[1][12]},{"Choice",yacht.table[0][i],yacht.table[1][i++]}
+		,{"4 of a Kind",yacht.table[0][i],yacht.table[1][i++]},
+		{"S. Straight",yacht.table[0][i],yacht.table[1][i++]},{"L. Straight",yacht.table[0][i],yacht.table[1][i++]}
+		,{"Full House",yacht.table[0][i],yacht.table[1][i++]}
+		,{"yacht",yacht.table[0][i],yacht.table[1][i++]},{"Result",yacht.table[0][13],yacht.table[1][13]}};
 		model = new DefaultTableModel(data,title);
 		JPanel rowofdice = new JPanel();
 		rowofdice.setLayout(new GridLayout(1, 5));
-		diceButton1 = new JButton(diceicon(yatch.play.dieces[0]));
+		diceButton1 = new JButton(diceicon(yacht.play.dieces[0]));
 		diceButton1.setActionCommand("dic0");
 		diceButton1.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton1,BorderLayout.CENTER);
 
 		
-		diceButton2 = new JButton(diceicon(yatch.play.dieces[1]));
+		diceButton2 = new JButton(diceicon(yacht.play.dieces[1]));
 		diceButton2.setActionCommand("dic1");
 		diceButton2.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton2);
 		
-		diceButton3 = new JButton(diceicon(yatch.play.dieces[2]));
+		diceButton3 = new JButton(diceicon(yacht.play.dieces[2]));
 		diceButton3.setActionCommand("dic2");
 		diceButton3.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton3);
 		
-		diceButton4 = new JButton(diceicon(yatch.play.dieces[3]));
+		diceButton4 = new JButton(diceicon(yacht.play.dieces[3]));
 		diceButton4.setActionCommand("dic3");
 		diceButton4.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton4);
 		
-		diceButton5 = new JButton(diceicon(yatch.play.dieces[4]));
+		diceButton5 = new JButton(diceicon(yacht.play.dieces[4]));
 		diceButton5.setActionCommand("dic4");
 		diceButton5.addActionListener(new ButtonClickListener(this));
 		rowofdice.add(diceButton5);
@@ -270,7 +270,7 @@ public class Layout extends JFrame implements Runnable{
 		suitbtn11.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn11);
 		
-		suitbtn12 = new JButton("Yatch");
+		suitbtn12 = new JButton("yacht");
 		suitbtn12.setActionCommand("sui11");
 		suitbtn12.addActionListener(new ButtonClickListener(this));
 		panel_3.add(suitbtn12);
@@ -309,13 +309,13 @@ public class Layout extends JFrame implements Runnable{
 		return icon;
 	}
 	public void updates() {
-		player1EmoLabel.setIcon(emojIcon(yatch.emoji[0]));
-		player2EmoLabel.setIcon(emojIcon(yatch.emoji[1]));
+		player1EmoLabel.setIcon(emojIcon(yacht.emoji[0]));
+		player2EmoLabel.setIcon(emojIcon(yacht.emoji[1]));
 		player1EmoLabel.setBackground(Color.WHITE);
 		player2EmoLabel.setBackground(Color.WHITE);
-		restofLabel.setText(Integer.toString(yatch.rollchance)+" turns left");
-		nowturn.setText("Player "+Integer.toString(2-(yatch.turn)%2)+"'s turn");
-		nowturnnum.setText(Integer.toString((yatch.turn+1)/2)+"/12");
+		restofLabel.setText(Integer.toString(yacht.rollchance)+" turns left");
+		nowturn.setText("Player "+Integer.toString(2-(yacht.turn)%2)+"'s turn");
+		nowturnnum.setText(Integer.toString((yacht.turn+1)/2)+"/12");
 		if(userinfo.dices[0]==0) {
 			diceButton1.setBackground(Color.LIGHT_GRAY);
 		} else {
@@ -393,31 +393,31 @@ public class Layout extends JFrame implements Runnable{
 		}else if(userinfo.suit == 11) {
 			suitbtn12.setBackground(Color.LIGHT_GRAY);
 		}
-		diceButton1.setIcon(diceicon(yatch.play.dieces[0]));
-		diceButton2.setIcon(diceicon(yatch.play.dieces[1]));
-		diceButton3.setIcon(diceicon(yatch.play.dieces[2]));
-		diceButton4.setIcon(diceicon(yatch.play.dieces[3]));
-		diceButton5.setIcon(diceicon(yatch.play.dieces[4]));
+		diceButton1.setIcon(diceicon(yacht.play.dieces[0]));
+		diceButton2.setIcon(diceicon(yacht.play.dieces[1]));
+		diceButton3.setIcon(diceicon(yacht.play.dieces[2]));
+		diceButton4.setIcon(diceicon(yacht.play.dieces[3]));
+		diceButton5.setIcon(diceicon(yacht.play.dieces[4]));
 		int i =0;
 		for(int j =0; j<15;j++) {
 			if(j==6) {
-				model.setValueAt(Integer.toString((yatch.table[0][14]))+"/63", j, 1);
-				model.setValueAt(Integer.toString((yatch.table[1][14]))+"/63", j, 2);
+				model.setValueAt(Integer.toString((yacht.table[0][14]))+"/63", j, 1);
+				model.setValueAt(Integer.toString((yacht.table[1][14]))+"/63", j, 2);
 				continue;
 			}
 			if(j==7) {
-				model.setValueAt(retval(yatch.table[0][12]), j, 1);
-				model.setValueAt(retval(yatch.table[1][12]), j, 2);
+				model.setValueAt(retval(yacht.table[0][12]), j, 1);
+				model.setValueAt(retval(yacht.table[1][12]), j, 2);
 				continue;
 			
 			}
 			if(j==14) {
-				model.setValueAt(retval(yatch.table[0][13]), j, 1);
-				model.setValueAt(retval(yatch.table[1][13]), j, 2);
+				model.setValueAt(retval(yacht.table[0][13]), j, 1);
+				model.setValueAt(retval(yacht.table[1][13]), j, 2);
 				continue;
 			}
-			model.setValueAt(retval(yatch.table[0][i]), j, 1);
-			model.setValueAt(retval(yatch.table[1][i++]), j, 2);
+			model.setValueAt(retval(yacht.table[0][i]), j, 1);
+			model.setValueAt(retval(yacht.table[1][i++]), j, 2);
 		}
 	}
 	public Object retval(int i) {
@@ -439,11 +439,11 @@ public class Layout extends JFrame implements Runnable{
 	}
 	@Override
 	public void run() {
-		if(yatch.numofman != 2) {
+		if(yacht.numofman != 2) {
 			JOptionPane.showMessageDialog(null, "Wait for people...");
 		}
 		while(true) {
-			if(yatch.numofman == 2) {
+			if(yacht.numofman == 2) {
 				Frame(); // 한번밖에 실행이안됨
 				break;
 			}
@@ -456,8 +456,8 @@ public class Layout extends JFrame implements Runnable{
 		// TODO Auto-generated method stub
 		while (true) {
 			updates();
-			if(yatch.turn==25) {
-				JOptionPane.showMessageDialog(this, Winner(yatch.winner(),userid));
+			if(yacht.turn==25) {
+				JOptionPane.showMessageDialog(this, Winner(yacht.winner(),userid));
 				System.exit(0);
 			}
 			try {
@@ -484,9 +484,9 @@ public class Layout extends JFrame implements Runnable{
 			}else if(realcommand.equals("sem")){
 				userinfo.actionString = command;
 			
-			}else if(userid == (2- yatch.turn%2)) { // 버튼씹는거
+			}else if(userid == (2- yacht.turn%2)) { // 버튼씹는거
 				if(realcommand.equals("dic")) {
-					if(yatch.rollchance ==3) {
+					if(yacht.rollchance ==3) {
 						JOptionPane.showMessageDialog(jframe, "First roll must roll all dice");
 					}else {
 						int a = Integer.parseInt(command.substring(3));
@@ -501,10 +501,10 @@ public class Layout extends JFrame implements Runnable{
 					userinfo.suit = a;
 					
 				}else{
-					if((realcommand.equals("rol")&&yatch.rollchance<=0)) {
+					if((realcommand.equals("rol")&&yacht.rollchance<=0)) {
 						JOptionPane.showMessageDialog(jframe, "You're Already fully rolled");
 						
-					}else if(realcommand.equals("det")&&yatch.rollchance==3) {
+					}else if(realcommand.equals("det")&&yacht.rollchance==3) {
 						JOptionPane.showMessageDialog(jframe, "You are not rolled");
 					}
 					else if(realcommand.equals("det")&&userinfo.tablefilled[userinfo.suit] == 1) {

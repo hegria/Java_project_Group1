@@ -8,12 +8,12 @@ public class Client {
 		Socket client = new Socket("localhost",5000);
 		DataInputStream dis =new DataInputStream(client.getInputStream());
 		int id = dis.read();
-		Yacht yatch = new Yacht();
-		yatch.numofman = id;
+		Yacht yacht = new Yacht();
+		yacht.numofman = id;
 		Userinfo user = new Userinfo();
-		Thread recieve = new ServerReceive(client, yatch);
+		Thread recieve = new ServerReceive(client, yacht);
 		System.out.println("Connected! I'm player"+Integer.toString(id));
-		Layout layout = new Layout(yatch, id, user);
+		Layout layout = new Layout(yacht, id, user);
 		Thread draw = new Thread(layout); // layout은 runnable이기때문에
 		Thread send = new ClientSend(client, user, id);
 		send.start();
