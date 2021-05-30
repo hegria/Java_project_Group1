@@ -6,8 +6,8 @@ import java.net.Socket;
 
 public class ServerSend extends Thread{ // SERVER의 Yatch정보를 encode해서 client한테 쏜다.
 	private Socket server;
-	private Yatch yatch;
-	public ServerSend(Socket soc, Yatch yat) {
+	private Yacht yatch;
+	public ServerSend(Socket soc, Yacht yat) {
 		this.server = soc;
 		this.yatch = yat;
 		// TODO Auto-generated constructor stub

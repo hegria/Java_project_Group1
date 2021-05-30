@@ -5,9 +5,9 @@ import java.net.Socket;
 
 public class ClientReceive extends Thread{
 	private Socket server;
-	private Yatch yatch;
+	private Yacht yatch;
 	String[] Code;
-	public ClientReceive(Socket socket,Yatch yatch) {
+	public ClientReceive(Socket socket,Yacht yatch) {
 		this.server = socket;
 		this.yatch = yatch;
 	}

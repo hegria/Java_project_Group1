@@ -8,7 +8,7 @@ public class Client {
 		Socket client = new Socket("localhost",5000);
 		DataInputStream dis =new DataInputStream(client.getInputStream());
 		int id = dis.read();
-		Yatch yatch = new Yatch();
+		Yacht yatch = new Yacht();
 		yatch.numofman = id;
 		Userinfo user = new Userinfo();
 		Thread recieve = new ServerReceive(client, yatch);

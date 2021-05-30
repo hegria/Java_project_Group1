@@ -10,7 +10,7 @@ public class Server {
 	
 	private static ArrayList<Thread> arr = new ArrayList<Thread>(); // 4°³¸é ²ËÂü!
 	public static void main(String[] args) {
-		Yatch yatch = new Yatch();
+		Yacht yatch = new Yacht();
 		ServerSocket ss = null;
 		int id = 1; // userid¸¦ º¸³»ÁÜ.
 		try {

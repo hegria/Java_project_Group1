@@ -1,9 +1,9 @@
 
 public class SetIcon extends Thread{
-	Yatch yatch;
+	Yacht yatch;
 	int player;
 	int emoji;
-	public SetIcon(Yatch yatch,int a, int b) {
+	public SetIcon(Yacht yatch,int a, int b) {
 		player = a;
 		emoji = b;
 		this.yatch =yatch;

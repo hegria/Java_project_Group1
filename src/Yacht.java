@@ -2,7 +2,7 @@
 import java.util.Random;
 
 
-public class Yatch {
+public class Yacht {
 	//전체 게임정보가 들어가야함 (Serversend가 parse해서 client한테 보낸다.)
 	// layout이 이 정보를 가지고 화면을 출력할거임..
 	int numofman = 0; // 게임 킬때 두명 들어와야 켜지는거..
@@ -11,7 +11,7 @@ public class Yatch {
 	int emoji[] = new int[2]; // 실제 press한 imoji값(실제플로팅되고있는 값음)
 	int turn; //1-24
 	int rollchance; // 갱신
-	Yatch(){ // 서버에서 처음 야추 정보가 될거임//
+	Yacht(){ // 서버에서 처음 야추 정보가 될거임//
 		turn = 1;
 		rollchance = 3;
 		for(int i=0;i<2;i++) {

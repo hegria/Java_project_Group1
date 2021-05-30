@@ -27,7 +27,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Layout extends JFrame implements Runnable{
-	Yatch yatch;
+	Yacht yatch;
 	int userid; // Player를 나눌거임.
 	int myinfo; // ??
 	Userinfo userinfo;
@@ -60,7 +60,7 @@ public class Layout extends JFrame implements Runnable{
 	JLabel restofLabel;
 	JLabel player1EmoLabel;
 	JLabel player2EmoLabel;
-	public Layout(Yatch yatch,int userid, Userinfo userinfo) {
+	public Layout(Yacht yatch,int userid, Userinfo userinfo) {
 		this.yatch = yatch; 
 		this.userid = userid;
 		this.userinfo = userinfo;
